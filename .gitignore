@@ -1,0 +1,10 @@
+# Frontend kutubxonalari
+frontend/node_modules/
+
+# Muhit fayllari (hamma joydagi)
+.env
+frontend/.env
+backend/.env
+
+# Build papkalari
+frontend/dist/
