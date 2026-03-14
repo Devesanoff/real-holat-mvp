@@ -1,78 +1,46 @@
-import { Bell, MapPin, BarChart3, Users, Plus } from 'lucide-react';
-import type { Stats } from '../types';
+import { Building2, Map, LayoutDashboard } from "lucide-react";
 
 interface NavbarProps {
-    stats: Stats;
-    onNewIssue: () => void;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
 }
 
-export function Navbar({ stats, onNewIssue }: NavbarProps) {
-    return (
-        <nav className="h-14 bg-slate-800/80 backdrop-blur-sm border-b border-slate-700/50 flex items-center justify-between px-5 shrink-0">
-            <div className="flex items-center gap-6">
-                {/* Logo */}
-                <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                        <MapPin className="w-4.5 h-4.5 text-white" size={18} />
-                    </div>
-                    <span className="text-base font-semibold tracking-tight text-white">Real Holat</span>
-                </div>
+export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 md:top-0 md:bottom-auto bg-slate-800 border-t md:border-t-0 md:border-b border-slate-700 z-[1000] p-4 flex justify-around md:justify-center md:gap-8 items-center h-16 shadow-lg">
+      <h1 className="hidden md:block text-slate-200 font-bold text-xl absolute left-6">
+        Real Holat
+      </h1>
 
-                {/* Divider */}
-                <div className="w-px h-6 bg-slate-700" />
+      <button
+        onClick={() => setActiveTab("home")}
+        className={`flex flex-col md:flex-row items-center gap-1 transition-colors ${
+          activeTab === "home" ? "text-blue-400" : "text-slate-400 hover:text-slate-200"
+        }`}
+      >
+        <Building2 size={24} />
+        <span className="text-xs md:text-sm font-medium">Bosh Sahifa</span>
+      </button>
 
-                {/* Stats */}
-                <div className="flex items-center gap-4 text-xs">
-                    <StatBadge
-                        icon={<BarChart3 size={13} />}
-                        label="Jami muammolar"
-                        value={stats.total}
-                    />
-                    <StatBadge
-                        icon={<Users size={13} />}
-                        label="Hal etildi"
-                        value={stats.hal_etildi}
-                        color="text-green-400"
-                    />
-                </div>
-            </div>
+      <button
+        onClick={() => setActiveTab("map")}
+        className={`flex flex-col md:flex-row items-center gap-1 transition-colors ${
+          activeTab === "map" ? "text-blue-400" : "text-slate-400 hover:text-slate-200"
+        }`}
+      >
+        <Map size={24} />
+        <span className="text-xs md:text-sm font-medium">Jonli Xarita</span>
+      </button>
 
-            <div className="flex items-center gap-3">
-                {/* Notification Bell */}
-                <button className="relative w-9 h-9 flex items-center justify-center rounded-lg hover:bg-slate-700/50 transition-colors">
-                    <Bell size={18} className="text-slate-400" />
-                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
-                </button>
-
-                {/* CTA */}
-                <button
-                    onClick={onNewIssue}
-                    className="flex items-center gap-2 px-4 h-9 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg transition-colors"
-                >
-                    <Plus size={16} />
-                    <span>Muammo Xabar Qilish</span>
-                </button>
-            </div>
-        </nav>
-    );
-}
-
-function StatBadge({
-    icon,
-    label,
-    value,
-    color = 'text-slate-300',
-}: {
-    icon: React.ReactNode;
-    label: string;
-    value: number;
-    color?: string;
-}) {
-    return (
-        <div className="flex items-center gap-1.5 text-slate-400">
-            {icon}
-            <span>{label}:</span>
-            <span className={`font-semibold ${color}`}>{value}</span>
-        </div>
-    );
+      <button
+        onClick={() => setActiveTab("dashboard")}
+        className={`flex flex-col md:flex-row items-center gap-1 transition-colors ${
+          activeTab === "dashboard" ? "text-blue-400" : "text-slate-400 hover:text-slate-200"
+        }`}
+      >
+        <LayoutDashboard size={24} />
+        <span className="text-xs md:text-sm font-medium">Ommaviy ko'rinish</span>
+      </button>
+    </nav>
+  );
 }
