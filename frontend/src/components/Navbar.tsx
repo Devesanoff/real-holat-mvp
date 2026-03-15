@@ -1,46 +1,57 @@
-import { Building2, Map, LayoutDashboard } from "lucide-react";
+import { Link, NavLink } from 'react-router-dom';
+import { Camera } from 'lucide-react';
+import { cn } from '../utils/helpers';
 
-interface NavbarProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-}
+export default function Navbar() {
+  const navItems = [
+    { name: 'Bosh sahifa', path: '/' },
+    { name: 'Muassasalar', path: '/muassasalar' },
+    { name: 'Jonli xarita', path: '/xarita' },
+    { name: 'Statistika', path: '/statistika' },
+  ];
 
-export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 md:top-0 md:bottom-auto bg-slate-800 border-t md:border-t-0 md:border-b border-slate-700 z-[1000] p-4 flex justify-around md:justify-center md:gap-8 items-center h-16 shadow-lg">
-      <h1 className="hidden md:block text-slate-200 font-bold text-xl absolute left-6">
-        Real Holat
-      </h1>
+    <nav className="bg-[#0F1F3D] sticky top-0 z-50 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 bg-orange-500 rounded-full animate-pulse" />
+            <span className="font-serif text-white text-xl tracking-wide">
+              Real <span className="text-blue-400">Holat</span>
+            </span>
+          </Link>
 
-      <button
-        onClick={() => setActiveTab("home")}
-        className={`flex flex-col md:flex-row items-center gap-1 transition-colors ${
-          activeTab === "home" ? "text-blue-400" : "text-slate-400 hover:text-slate-200"
-        }`}
-      >
-        <Building2 size={24} />
-        <span className="text-xs md:text-sm font-medium">Bosh Sahifa</span>
-      </button>
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  cn(
+                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                    isActive 
+                      ? 'bg-white/10 text-white' 
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                  )
+                }
+              >
+                {item.name}
+              </NavLink>
+            ))}
+          </div>
 
-      <button
-        onClick={() => setActiveTab("map")}
-        className={`flex flex-col md:flex-row items-center gap-1 transition-colors ${
-          activeTab === "map" ? "text-blue-400" : "text-slate-400 hover:text-slate-200"
-        }`}
-      >
-        <Map size={24} />
-        <span className="text-xs md:text-sm font-medium">Jonli Xarita</span>
-      </button>
-
-      <button
-        onClick={() => setActiveTab("dashboard")}
-        className={`flex flex-col md:flex-row items-center gap-1 transition-colors ${
-          activeTab === "dashboard" ? "text-blue-400" : "text-slate-400 hover:text-slate-200"
-        }`}
-      >
-        <LayoutDashboard size={24} />
-        <span className="text-xs md:text-sm font-medium">Ommaviy ko'rinish</span>
-      </button>
+          {/* CTA Button */}
+          <Link
+            to="/xabar"
+            className="hidden sm:flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
+          >
+            <Camera className="w-4 h-4" />
+            Xabar berish
+          </Link>
+        </div>
+      </div>
     </nav>
   );
 }

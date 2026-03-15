@@ -2,34 +2,32 @@ package models
 
 import "time"
 
-// Report - Fuqaroning 30 soniyalik hisoboti
 type Report struct {
 	ID          string    `json:"id"`
-	IsDone      bool      `json:"is_done"` // true = Bajarildi, false = Muammo
-	PhotoBase64 string    `json:"photo_base64,omitempty"`
+	UserName    string    `json:"user_name,omitempty"`
 	Comment     string    `json:"comment"`
+	IsDone      bool      `json:"is_done"`
+	PhotoURL    string    `json:"photo_url,omitempty"`
+	PhotoBase64 string    `json:"photo_base64,omitempty"`
 	CreatedAt   time.Time `json:"created_at"`
 }
 
-// PromisedWork - Davlat nima va'da qilgan?
 type PromisedWork struct {
 	Title  string `json:"title"`
-	Status string `json:"status"` // "Bajarildi" yoki "Bajarilmoqda"
+	Status string `json:"status"`
 }
 
-// Coordinates - Xarita uchun geolokatsiya
 type Coordinates struct {
 	Lat float64 `json:"lat"`
 	Lng float64 `json:"lng"`
 }
 
-// Facility - Muassasa (Maktab yoki Tibbiyot)
 type Facility struct {
 	ID            string         `json:"id"`
 	Name          string         `json:"name"`
-	Type          string         `json:"type"` // "Maktab" yoki "Tibbiyot"
+	Type          string         `json:"type"`
 	Location      Coordinates    `json:"location"`
 	PromisedWorks []PromisedWork `json:"promised_works"`
 	Reports       []Report       `json:"reports"`
-	CurrentStatus string         `json:"current_status"` // "Yashil", "Sariq", "Qizil"
+	CurrentStatus string         `json:"current_status"`
 }
