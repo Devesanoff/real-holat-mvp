@@ -189,7 +189,7 @@ export default function MapPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
                     <MessageCircle size={10} />Fuqarolar fikri
                   </div>
-                  <p style={{ fontSize: 11, color: '#475569', margin: 0 }}>"{selected.reports[0].text}"</p>
+                  <p style={{ fontSize: 11, color: '#475569', margin: 0 }}>"{selected.reports[0].comment}"</p>
                 </div>
               )}
               <div style={{ marginBottom: 10 }}>
@@ -197,7 +197,7 @@ export default function MapPage() {
                 {selected.tasks.slice(0, 3).map((t, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 7, paddingBottom: 3 }}>
                     <div style={{ width: 7, height: 7, borderRadius: '50%', flexShrink: 0, background: t.status === 'done' ? '#10b981' : t.status === 'warn' ? '#f59e0b' : '#ef4444' }} />
-                    <span style={{ fontSize: 11, color: '#475569' }}>{t.label}</span>
+                    <span style={{ fontSize: 11, color: '#475569' }}>{t.title}</span>
                   </div>
                 ))}
               </div>
